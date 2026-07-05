@@ -1,0 +1,70 @@
+{
+  "Software Developer": [
+    {"title": "Data Structures and Algorithms Specialization", "provider": "Coursera - UC San Diego", "url": "https://www.coursera.org/specializations/data-structures-algorithms", "level": "Beginner to Intermediate"},
+    {"title": "Version Control with Git", "provider": "Coursera - Atlassian", "url": "https://www.coursera.org/learn/version-control-with-git", "level": "Beginner"},
+    {"title": "Software Design and Architecture Specialization", "provider": "Coursera - University of Alberta", "url": "https://www.coursera.org/specializations/software-design-architecture", "level": "Intermediate"}
+  ],
+  "Python Developer": [
+    {"title": "Python for Everybody Specialization", "provider": "Coursera - University of Michigan", "url": "https://www.coursera.org/specializations/python", "level": "Beginner"},
+    {"title": "Python Django Web Dev Tutorial", "provider": "YouTube - Programming with Mosh", "url": "https://www.youtube.com/watch?v=OTmQOjsl0eg", "level": "Intermediate"},
+    {"title": "Modern Flask for Beginners", "provider": "Udemy", "url": "https://www.udemy.com/course/flask-framework-complete-course/", "level": "Beginner"}
+  ],
+  "Java Developer": [
+    {"title": "Java Programming and Software Engineering Fundamentals", "provider": "Coursera - Duke University", "url": "https://www.coursera.org/specializations/java-programming", "level": "Beginner"},
+    {"title": "Spring Boot Tutorial for Beginners", "provider": "YouTube - Amigoscode", "url": "https://www.youtube.com/watch?v=vtPkDP3vjhg", "level": "Intermediate"},
+    {"title": "Java Microservices with Spring Boot and Spring Cloud", "provider": "Udemy", "url": "https://www.udemy.com/course/microservices-with-spring-boot-and-spring-cloud/", "level": "Advanced"}
+  ],
+  "Frontend Developer": [
+    {"title": "HTML, CSS, and Javascript for Web Developers", "provider": "Coursera - Johns Hopkins University", "url": "https://www.coursera.org/learn/html-css-javascript-for-web-developers", "level": "Beginner"},
+    {"title": "The Complete React Developer Course", "provider": "Udemy", "url": "https://www.udemy.com/course/react-2nd-edition/", "level": "Intermediate"},
+    {"title": "CSS Layouts and Tailwind CSS", "provider": "YouTube - Traversy Media", "url": "https://www.youtube.com/watch?v=UBOj6rqRUME", "level": "Beginner"}
+  ],
+  "Backend Developer": [
+    {"title": "Introduction to Node.js and Express", "provider": "Coursera", "url": "https://www.coursera.org/learn/introduction-nodejs-express", "level": "Beginner"},
+    {"title": "SQL for Data Science", "provider": "Coursera - UC Davis", "url": "https://www.coursera.org/learn/sql-for-data-science", "level": "Beginner"},
+    {"title": "Docker and Kubernetes: The Complete Guide", "provider": "Udemy", "url": "https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/", "level": "Intermediate"}
+  ],
+  "Full Stack Developer": [
+    {"title": "Full-Stack Web Development with React Specialization", "provider": "Coursera - HKUST", "url": "https://www.coursera.org/specializations/full-stack-react", "level": "Intermediate"},
+    {"title": "The Complete Web Developer Bootcamp", "provider": "Udemy", "url": "https://www.udemy.com/course/the-web-developer-bootcamp/", "level": "Beginner"}
+  ],
+  "Salesforce Administrator": [
+    {"title": "Salesforce Administrator Certification Course", "provider": "Udemy", "url": "https://www.udemy.com/course/salesforce-administrator-certification/", "level": "Beginner"},
+    {"title": "Salesforce Admin Trailmix", "provider": "Trailhead - Salesforce", "url": "https://trailhead.salesforce.com/en/content/learn/trailmixes/prepare-for-your-salesforce-administrator-credential", "level": "Beginner to Intermediate"}
+  ],
+  "Data Analyst": [
+    {"title": "Google Data Analytics Professional Certificate", "provider": "Coursera - Google", "url": "https://www.coursera.org/professional-certificates/google-data-analytics", "level": "Beginner"},
+    {"title": "Data Analysis with Python", "provider": "Coursera - IBM", "url": "https://www.coursera.org/learn/data-analysis-with-python", "level": "Intermediate"},
+    {"title": "Data Analysis in Power BI", "provider": "Coursera - Microsoft", "url": "https://www.coursera.org/learn/microsoft-power-bi-data-analyst", "level": "Intermediate"}
+  ],
+  "AI Engineer": [
+    {"title": "AI for Everyone", "provider": "Coursera - DeepLearning.AI", "url": "https://www.coursera.org/learn/ai-for-everyone", "level": "Beginner"},
+    {"title": "Generative AI with Large Language Models", "provider": "Coursera - DeepLearning.AI", "url": "https://www.coursera.org/learn/generative-ai-with-llms", "level": "Intermediate"},
+    {"title": "Gemini API Course - Prompting & Integration", "provider": "YouTube - Google Cloud Tech", "url": "https://www.youtube.com/watch?v=S0y_2vP4mC8", "level": "Intermediate"}
+  ],
+  "Machine Learning Engineer": [
+    {"title": "Machine Learning Specialization", "provider": "Coursera - Stanford / DeepLearning.AI", "url": "https://www.coursera.org/specializations/machine-learning-introduction", "level": "Beginner to Intermediate"},
+    {"title": "Introduction to Deep Learning", "provider": "Coursera - MIT", "url": "https://www.coursera.org/learn/deep-learning", "level": "Intermediate"},
+    {"title": "Machine Learning Engineering for Production (MLOps) Specialization", "provider": "Coursera - DeepLearning.AI", "url": "https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops", "level": "Advanced"}
+  ],
+  "Cloud Engineer": [
+    {"title": "AWS Cloud Practitioner Essentials", "provider": "AWS / Coursera", "url": "https://www.coursera.org/learn/aws-cloud-practitioner-essentials", "level": "Beginner"},
+    {"title": "Google Cloud Associate Cloud Engineer", "provider": "Coursera - Google Cloud", "url": "https://www.coursera.org/learn/preparing-cloud-associate-cloud-engineer-exam", "level": "Intermediate"},
+    {"title": "Terraform on AWS for Beginners", "provider": "Udemy", "url": "https://www.udemy.com/course/terraform-on-aws/", "level": "Intermediate"}
+  ],
+  "DevOps Engineer": [
+    {"title": "Introduction to DevOps", "provider": "Coursera - IBM", "url": "https://www.coursera.org/learn/intro-to-devops", "level": "Beginner"},
+    {"title": "CI/CD Pipelines with Jenkins & GitHub Actions", "provider": "Udemy", "url": "https://www.udemy.com/course/devops-ci-cd-pipelines/", "level": "Intermediate"},
+    {"title": "DevOps Bootcamp", "provider": "YouTube - TechWorld with Nana", "url": "https://www.youtube.com/watch?v=j5SgJyRxeKI", "level": "Beginner to Intermediate"}
+  ],
+  "Cyber Security Analyst": [
+    {"title": "Google Cybersecurity Professional Certificate", "provider": "Coursera - Google", "url": "https://www.coursera.org/professional-certificates/google-cybersecurity", "level": "Beginner"},
+    {"title": "CompTIA Security+ Exam Prep", "provider": "Udemy", "url": "https://www.udemy.com/course/comptia-security-cert-sy0-601/", "level": "Beginner to Intermediate"},
+    {"title": "Penetration Testing - Ethical Hacking", "provider": "YouTube - freeCodeCamp", "url": "https://www.youtube.com/watch?v=3Kq1MIfTWCE", "level": "Beginner to Intermediate"}
+  ],
+  "UI UX Designer": [
+    {"title": "Google UX Design Professional Certificate", "provider": "Coursera - Google", "url": "https://www.coursera.org/professional-certificates/google-ux-design", "level": "Beginner"},
+    {"title": "Figma UI/UX Design Essentials", "provider": "Udemy", "url": "https://www.udemy.com/course/figma-ux-ui-design-user-experience-tutorial/", "level": "Beginner"},
+    {"title": "UI UX Fundamentals & Typography", "provider": "YouTube - Flux Academy", "url": "https://www.youtube.com/watch?v=c9Wg6A_z5n8", "level": "Beginner"}
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "Software Developer": [
+    {"title": "Library Management System", "description": "Build a console or simple GUI application to manage books, users, borrow history, and search filters.", "difficulty": "Beginner", "tech_stack": "Python, SQL"},
+    {"title": "Task Scheduler & Task Manager API", "description": "Create a backend service that schedules and executes periodic background jobs with real-time status reporting.", "difficulty": "Intermediate", "tech_stack": "Java, Spring Boot, PostgreSQL, Quartz Scheduler"},
+    {"title": "Distributed Key-Value Store", "description": "Develop a replicated, consensus-driven key-value store database with node failover support.", "difficulty": "Advanced", "tech_stack": "Go or C++, Raft Consensus Protocol, gRPC"}
+  ],
+  "Python Developer": [
+    {"title": "Web Scraper and CLI Data Analyzer", "description": "Scrape jobs or real estate data from websites, save them to a local SQLite database, and run data summary CLI reports.", "difficulty": "Beginner", "tech_stack": "Python, BeautifulSoup, SQLite, argparse"},
+    {"title": "E-Commerce REST API", "description": "Create a fully functional e-commerce RESTful API supporting CRUD operations for products, user cart checkout, and payment gateways.", "difficulty": "Intermediate", "tech_stack": "Python, Flask or Django, PostgreSQL, Stripe API"},
+    {"title": "Real-time AI Chatbot App", "description": "Build an AI chatbot that interfaces with the Google Gemini API to answer specific domain questions with context database lookups.", "difficulty": "Advanced", "tech_stack": "Python, FastAPI, Gemini API, Pinecone Vector Database, React"}
+  ],
+  "Java Developer": [
+    {"title": "Student Grading System", "description": "A terminal app that records student information, subjects, scores, and calculates grades with file storage.", "difficulty": "Beginner", "tech_stack": "Java SE, File I/O"},
+    {"title": "Employee Management REST Service", "description": "Develop an employee record portal with role-based access, JPA mappings, and validation checks.", "difficulty": "Intermediate", "tech_stack": "Java, Spring Boot, MySQL, Spring Security"},
+    {"title": "Microservices Banking Portal", "description": "Develop a multi-service banking application featuring accounts, transaction transfers, and notification services.", "difficulty": "Advanced", "tech_stack": "Spring Cloud, Spring Boot, Eureka Server, RabbitMQ, PostgreSQL"}
+  ],
+  "Frontend Developer": [
+    {"title": "Personal Portfolio Website", "description": "Design a fully responsive developer portfolio featuring projects, skills, biography, and a contact form.", "difficulty": "Beginner", "tech_stack": "HTML5, CSS3, JavaScript, Bootstrap 5"},
+    {"title": "Recipe Finder App", "description": "Create a dynamic React web app that queries a recipe API, filters by ingredients, and saves favorite recipes locally.", "difficulty": "Intermediate", "tech_stack": "React, CSS Modules, Fetch API, LocalStorage"},
+    {"title": "Collaborative Kanban Board", "description": "Build a real-time collaborative Kanban board (similar to Trello) with card drag-and-drop actions and user sync.", "difficulty": "Advanced", "tech_stack": "React, Tailwind CSS, Firebase Firestore, React-Beautiful-Dnd"}
+  ],
+  "Backend Developer": [
+    {"title": "URL Shortener Service", "description": "Implement a service that takes a long URL, generates a shortened version, and redirects users with redirect counts.", "difficulty": "Beginner", "tech_stack": "Node.js, Express, MongoDB"},
+    {"title": "Blogging Platform API with JWT", "description": "Develop a secure backend API allowing registration, login, post drafts, comments, and file uploads.", "difficulty": "Intermediate", "tech_stack": "Node.js, Express, PostgreSQL, JWT, AWS S3"},
+    {"title": "Real-time Chat and Notification Engine", "description": "A high-performance socket server to support thousands of active concurrent chat rooms and instant web alerts.", "difficulty": "Advanced", "tech_stack": "Node.js, WebSockets (socket.io), Redis Pub/Sub, PostgreSQL"}
+  ],
+  "Full Stack Developer": [
+    {"title": "Collaborative Todo List", "description": "Create a shared task manager where multiple users can view, update, and sort tasks simultaneously.", "difficulty": "Beginner", "tech_stack": "Node.js, React, SQLite"},
+    {"title": "Peer-to-Peer Rental Platform", "description": "Build a listing portal where users can list items, search with location filters, book reservations, and process transactions.", "difficulty": "Intermediate", "tech_stack": "React, Flask, PostgreSQL, Stripe, Google Maps API"},
+    {"title": "Social Networking Engine", "description": "Design a complete social platform featuring user profiles, dynamic news feed posts, friend networks, real-time messaging, and media uploads.", "difficulty": "Advanced", "tech_stack": "React, Tailwind, Node.js, Express, MongoDB, Socket.io, AWS S3"}
+  ],
+  "Salesforce Administrator": [
+    {"title": "Recruitment App Setup", "description": "Create Custom Objects (Candidate, Job Position, Job Application), validation rules, page layouts, and record sharing criteria.", "difficulty": "Beginner", "tech_stack": "Salesforce Setup, Schema Builder, Page Layouts"},
+    {"title": "Automated Customer Feedback System", "description": "Build a Flow Builder rule that emails customer satisfaction surveys upon support case closure, aggregates responses, and triggers manager alerts.", "difficulty": "Intermediate", "tech_stack": "Salesforce Flow Builder, Email Alerts, Formulas"},
+    {"title": "Sales Performance Executive Dashboard", "description": "Design dynamic dashboards with multi-layered reports, permission filters, and scheduled report subscriptions for management.", "difficulty": "Advanced", "tech_stack": "Salesforce Reports & Dashboards, SOQL, Sharing Rules"}
+  ],
+  "Data Analyst": [
+    {"title": "Sales Data Performance Report", "description": "Analyze retail sales records to discover monthly trends, top-selling items, and customer segments.", "difficulty": "Beginner", "tech_stack": "Excel, Pivot Tables, VBA"},
+    {"title": "Exploratory Data Analysis (EDA) on Housing Market", "description": "Explore housing market prices, fill missing data, clean structures, run correlations, and build plots.", "difficulty": "Intermediate", "tech_stack": "Python, Pandas, NumPy, Matplotlib, Seaborn"},
+    {"title": "Interactive Executive Financial Dashboard", "description": "Construct an interactive dashboard tracking active KPIs, revenue streams, budgets, and forecasts.", "difficulty": "Advanced", "tech_stack": "Power BI, SQL Database, DAX Formulas, ETL pipeline"}
+  ],
+  "AI Engineer": [
+    {"title": "Sentiment Classifier on Movie Reviews", "description": "Train a classic Naive Bayes or Logistic Regression model to classify text reviews into positive or negative sentiments.", "difficulty": "Beginner", "tech_stack": "Python, NLTK, Scikit-Learn"},
+    {"title": "Gemini-powered Document Reviewer", "description": "Build a web tool that extracts text from uploaded PDF/Word docs and runs quality prompts through the Gemini API.", "difficulty": "Intermediate", "tech_stack": "Python, Flask, Gemini API, PyPDF2"},
+    {"title": "Multi-modal RAG QA Assistant", "description": "Create an advanced retrieval system that answers user queries on text documents and images using semantic vector databases.", "difficulty": "Advanced", "tech_stack": "Python, Gemini API, LangChain, FAISS Vector DB, Streamlit"}
+  ],
+  "Machine Learning Engineer": [
+    {"title": "Iris Species Classifier", "description": "Train a simple decision tree model to classify flower species based on measurements.", "difficulty": "Beginner", "tech_stack": "Python, Scikit-Learn, Pandas"},
+    {"title": "Customer Churn Predictor", "description": "Clean a telecom dataset, handle class imbalance, train random forests/XGBoost, and evaluate precision-recall metrics.", "difficulty": "Intermediate", "tech_stack": "Python, Pandas, Scikit-Learn, Imbalanced-Learn, Joblib"},
+    {"title": "Real-time Object Detection Pipeline", "description": "Deploy a custom-trained object detection model with streaming video capabilities using high-speed network inferencing.", "difficulty": "Advanced", "tech_stack": "Python, PyTorch, OpenCV, YOLO model, MLOps Model Registry"}
+  ],
+  "Cloud Engineer": [
+    {"title": "Static Web Hosting Setup", "description": "Configure an AWS S3 bucket to host a static website, set public permissions, and link with CloudFront CDN.", "difficulty": "Beginner", "tech_stack": "AWS S3, CloudFront, Route 53"},
+    {"title": "Infrastructure-as-Code (IaC) Network Stack", "description": "Deploy a highly available VPC network across multiple zones with public/private subnets, NAT gateways, and firewalls.", "difficulty": "Intermediate", "tech_stack": "Terraform, AWS, AWS VPC, AWS Security Groups"},
+    {"title": "Auto-scaling Containerized Application", "description": "Deploy a microservice application that automatically scales up/down container nodes based on load metrics.", "difficulty": "Advanced", "tech_stack": "AWS EKS (Kubernetes), Docker, Terraform, Prometheus, Grafana"}
+  ],
+  "DevOps Engineer": [
+    {"title": "Dockerize a Flask/Node.js App", "description": "Write a multi-stage Dockerfile to containerize a web application, and manage run environments with docker-compose.", "difficulty": "Beginner", "tech_stack": "Docker, Docker Compose, Flask/Node"},
+    {"title": "Automated Lint, Test, and Build Pipeline", "description": "Set up a pipeline that triggers code checks, runs unit tests, builds Docker containers, and pushes images to a registry.", "difficulty": "Intermediate", "tech_stack": "GitHub Actions or Jenkins, Docker, PyTest, SonarQube"},
+    {"title": "Kubernetes GitOps Deployment Loop", "description": "Deploy an application to a Kubernetes cluster using a GitOps controller that continuously syncs the state with a Git repository.", "difficulty": "Advanced", "tech_stack": "Kubernetes, ArgoCD, Helm, Docker, GitHub"}
+  ],
+  "Cyber Security Analyst": [
+    {"title": "Vulnerability Scan Report", "description": "Run automated tools to discover open ports, scan for vulnerabilities on a dummy host, and write mitigation suggestions.", "difficulty": "Beginner", "tech_stack": "Nmap, Wireshark, Nessus Essentials"},
+    {"title": "Intrusion Detection System (IDS) alerts", "description": "Set up a network monitoring tool, log packet analysis, configure detection signatures, and trigger alerts on suspicious requests.", "difficulty": "Intermediate", "tech_stack": "Snort IDS, Linux, Bash Scripting, Wireshark"},
+    {"title": "Automated Web Security Audit Script", "description": "Create a script that checks web pages for common security risks like CORS settings, SSL configuration, missing security headers, and brute-force protection.", "difficulty": "Advanced", "tech_stack": "Python, Requests, OWASP ZAP API, Linux"}
+  ],
+  "UI UX Designer": [
+    {"title": "Landing Page High-Fidelity UI", "description": "Create user wireframes, layouts, typography styling, and visual high-fidelity mockups for a landing page.", "difficulty": "Beginner", "tech_stack": "Figma"},
+    {"title": "Mobile Banking App Prototype", "description": "Design an interactive, clickable prototype of a mobile banking app with smooth screen transitions, card flows, and transaction logs.", "difficulty": "Intermediate", "tech_stack": "Figma, Interactive Components, Prototyping"},
+    {"title": "Design System with Component library", "description": "Establish a consistent design system defining buttons, form inputs, navigation cards, color palettes, and responsive grids.", "difficulty": "Advanced", "tech_stack": "Figma, Token Studio, Component Properties"}
+  ]
+}

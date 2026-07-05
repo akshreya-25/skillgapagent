@@ -1,0 +1,10 @@
+flask
+flask-login
+pdfplumber
+PyPDF2
+spacy
+google-generativeai
+reportlab
+requests
+werkzeug
+gunicorn
