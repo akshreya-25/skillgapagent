@@ -1,0 +1,266 @@
+/* Dashboard Elements & Components Styling */
+
+/* Metric Cards */
+.metric-card {
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.metric-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md) !important;
+}
+
+.metric-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.metric-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+/* circular readiness gauge */
+.progress-circle-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.progress-circle {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.progress-circle-bg {
+    fill: none;
+    stroke: var(--border-color);
+    stroke-width: 8;
+}
+
+.progress-circle-bar {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 283; /* 2 * PI * r (r=45) */
+    transition: stroke-dashoffset 1s ease-out;
+}
+
+.progress-circle-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+/* Resume PDF Dropzone */
+.resume-dropzone {
+    border-color: var(--border-color) !important;
+    background-color: transparent;
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+}
+
+.resume-dropzone:hover {
+    background-color: var(--bg-body);
+    border-color: var(--primary) !important;
+    cursor: pointer;
+}
+
+/* Floating AI Assistant Chat drawer */
+.chat-toggle-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    color: var(--text-white);
+    border: none;
+    cursor: pointer;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.4);
+    transition: transform var(--transition-speed) cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.chat-toggle-btn:hover {
+    transform: scale(1.08);
+}
+
+.chat-drawer {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 380px;
+    height: 500px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    z-index: 998;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(30px) scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease;
+}
+
+.chat-drawer.open {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.chat-drawer-header {
+    padding: 1rem;
+    background: var(--primary-gradient);
+    color: var(--text-white);
+    display: flex;
+    align-items: center;
+    justify-content: justify;
+}
+
+.chat-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.chat-close-btn {
+    background: none;
+    border: none;
+    color: var(--text-white);
+    opacity: 0.8;
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: opacity var(--transition-speed);
+}
+
+.chat-close-btn:hover {
+    opacity: 1;
+}
+
+.chat-drawer-body {
+    flex-grow: 1;
+    padding: 1.25rem;
+    overflow-y: auto;
+    background-color: var(--bg-body);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.chat-message {
+    max-width: 80%;
+    padding: 0.8rem 1rem;
+    border-radius: 14px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.bot-msg {
+    align-self: flex-start;
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-top-left-radius: 2px;
+}
+
+.user-msg {
+    align-self: flex-end;
+    background: var(--primary-gradient);
+    color: var(--text-white);
+    border-top-right-radius: 2px;
+}
+
+.chat-drawer-footer {
+    padding: 1rem;
+    background-color: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+}
+
+.btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    padding: 0;
+}
+
+/* Custom general settings helper classes */
+.fs-7 {
+    font-size: 0.85rem;
+}
+.fs-8 {
+    font-size: 0.75rem;
+}
+.last-mb-0:last-child {
+    margin-bottom: 0 !important;
+}
+.last-border-0:last-child {
+    border-bottom: 0 !important;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 576px) {
+    .chat-drawer {
+        width: calc(100% - 40px);
+        right: 20px;
+        left: 20px;
+        bottom: 90px;
+    }
+}
+.chat-drawer-header {
+    display: flex;
+    justify-content: space-between;
+}
+.chat-drawer-header > div {
+    display: flex;
+}
+.chat-status {
+    font-size: 0.75rem;
+}
+.timeline-card {
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+.timeline-card:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md) !important;
+}
+.badge-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
