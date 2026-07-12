@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center py-5">
+    <div class="col-md-5">
+        <div class="card border-0 shadow-lg rounded-4 p-4">
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <i class="fa-solid fa-user-plus text-primary fa-3x mb-2"></i>
+                    <h3 class="fw-bold">Create Account</h3>
+                    <p class="text-muted small">Register to start your career skills mapping</p>
+                </div>
+                
+                <form action="{{ url_for('main.register') }}" method="POST" id="register-form">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" required minlength="3">
+                        <label for="username">Username</label>
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
+                        <label for="email">Email Address</label>
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required minlength="6">
+                        <label for="password">Password</label>
+                    </div>
+                    
+                    <div class="form-floating mb-4">
+                        <input type="password" class="form-control" id="confirm_password" placeholder="Confirm Password" required>
+                        <label for="confirm_password">Confirm Password</label>
+                        <div class="invalid-feedback">Passwords do not match.</div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-sm mb-3">
+                        Register <i class="fa-solid fa-user-plus ms-1"></i>
+                    </button>
+                </form>
+                
+                <div class="text-center mt-3">
+                    <span class="text-muted small">Already have an account?</span>
+                    <a href="{{ url_for('main.login') }}" class="small fw-bold text-decoration-none ms-1">Login here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('register-form').addEventListener('submit', function(e) {
+    const password = document.getElementById('password').value;
+    const confirm = document.getElementById('confirm_password').value;
+    const confirmInput = document.getElementById('confirm_password');
+    
+    if (password !== confirm) {
+        e.preventDefault();
+        confirmInput.classList.add('is-invalid');
+    } else {
+        confirmInput.classList.remove('is-invalid');
+    }
+});
+</script>
+{% endblock %}

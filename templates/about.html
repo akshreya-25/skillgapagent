@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid px-0">
+    <div class="mb-4">
+        <h2 class="fw-bold mb-1">About the System</h2>
+        <p class="text-muted small">System technical specifications and academic project abstract</p>
+    </div>
+    
+    <div class="row g-4">
+        <!-- Abstract Column -->
+        <div class="col-md-8">
+            <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                <h4 class="fw-bold text-dark mb-3">Academic Abstract</h4>
+                <p class="text-secondary small leading-relaxed">
+                    The <strong>Skill Gap Analysis Agent</strong> is an AI-powered educational technology tool designed to identify competency disparities in students and job seekers. Transitioning from academic studies to industry roles requires specific domain capabilities that are often missing from general curricula.
+                </p>
+                <p class="text-secondary small leading-relaxed">
+                    By parsing uploaded PDF resumes, the system extracts core competencies. It compares these findings against targeted job criteria (drawn from 14 professional fields). The mismatch findings generate a personalized readiness percentage, an 8-week structured roadmap, certification paths, and recommended course materials. A built-in AI career advisor assists users through real-time chat dialogues.
+                </p>
+            </div>
+            
+            <div class="card border-0 shadow-sm rounded-4 p-4">
+                <h4 class="fw-bold text-dark mb-3">Technology Stack</h4>
+                <div class="row g-3 text-secondary small">
+                    <div class="col-md-6">
+                        <div class="p-2.5 rounded bg-light border">
+                            <strong>Backend Architecture:</strong> Python, Flask, SQLite database
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-2.5 rounded bg-light border">
+                            <strong>Frontend Design:</strong> Bootstrap 5, Vanilla CSS3, Javascript, Chart.js
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-2.5 rounded bg-light border">
+                            <strong>Artificial Intelligence:</strong> Google Gemini 1.5 Flash API
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-2.5 rounded bg-light border">
+                            <strong>Resume Parsing:</strong> pdfplumber, PyPDF2, spaCy NLP
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Objectives Column -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-list-check text-primary me-2"></i>Core Objectives</h5>
+                <ul class="list-unstyled mb-0 text-secondary small">
+                    <li class="d-flex align-items-start mb-2.5">
+                        <span class="badge bg-primary p-1 me-2.5 mt-0.5"><i class="fa-solid fa-check fs-8"></i></span>
+                        <span>Extract resume skills using combined NLP and keyword algorithms.</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-2.5">
+                        <span class="badge bg-primary p-1 me-2.5 mt-0.5"><i class="fa-solid fa-check fs-8"></i></span>
+                        <span>Map client capabilities against predefined required role skills.</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-2.5">
+                        <span class="badge bg-primary p-1 me-2.5 mt-0.5"><i class="fa-solid fa-check fs-8"></i></span>
+                        <span>Generate readiness scores and interactive match charts.</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-2.5">
+                        <span class="badge bg-primary p-1 me-2.5 mt-0.5"><i class="fa-solid fa-check fs-8"></i></span>
+                        <span>Structure week-by-week 8-week learning roadmaps.</span>
+                    </li>
+                    <li class="d-flex align-items-start">
+                        <span class="badge bg-primary p-1 me-2.5 mt-0.5"><i class="fa-solid fa-check fs-8"></i></span>
+                        <span>Recommend top courses, certifications, and up-skilling projects.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

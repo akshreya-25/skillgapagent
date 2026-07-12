@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid px-0">
+    <!-- Header -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Personalized 8-Week Roadmap</h2>
+            <p class="text-muted small mb-0">Step-by-step curriculum to transition into a <strong>{{ job_role }}</strong> role</p>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="{{ url_for('main.result', analysis_id=analysis_id) }}" class="btn btn-outline-secondary rounded-pill px-3">
+                <i class="fa-solid fa-arrow-left me-1"></i> Back to Report
+            </a>
+            <a href="{{ url_for('main.recommendations', analysis_id=analysis_id) }}" class="btn btn-success rounded-pill px-3 fw-bold">
+                <i class="fa-solid fa-graduation-cap me-1"></i> Study Resources
+            </a>
+        </div>
+    </div>
+    
+    <!-- Timeline Stack -->
+    <div class="roadmap-timeline">
+        {% for week in roadmap %}
+        <div class="timeline-item mb-4">
+            <div class="timeline-badge bg-primary text-white">
+                W{{ week.week_number }}
+            </div>
+            <div class="card border-0 shadow-sm rounded-4 timeline-card p-4 hover-lift">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3 border-bottom pb-2">
+                    <div>
+                        <h4 class="fw-bold text-dark mb-1">Week {{ week.week_number }}: {{ week.title }}</h4>
+                        <span class="text-muted small">Topic Milestones</span>
+                    </div>
+                    <div class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-semibold">
+                        Progress: Plan set
+                    </div>
+                </div>
+                
+                <div class="row g-3">
+                    <!-- Topics Column -->
+                    <div class="col-md-6 border-end-md">
+                        <h6 class="fw-bold text-dark"><i class="fa-solid fa-book-open text-primary me-2"></i>Core Topics</h6>
+                        <ul class="mb-3">
+                            {% for topic in week.topics %}
+                            <li class="text-secondary small mb-1">{{ topic }}</li>
+                            {% endfor %}
+                        </ul>
+                        
+                        <h6 class="fw-bold text-dark"><i class="fa-solid fa-laptop-code text-primary me-2"></i>Practice Guides</h6>
+                        <p class="text-secondary small mb-0">{{ week.practice }}</p>
+                    </div>
+                    
+                    <!-- Projects/Assignments Column -->
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h6 class="fw-bold text-dark"><i class="fa-solid fa-diagram-project text-success me-2"></i>Mini-Project Task</h6>
+                            <div class="p-2.5 rounded bg-success-subtle border border-success-subtle text-success small">
+                                <strong>{{ week.mini_project }}</strong>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h6 class="fw-bold text-dark"><i class="fa-solid fa-square-check text-warning me-2"></i>Assignment</h6>
+                            <div class="p-2.5 rounded bg-warning-subtle border border-warning-subtle text-dark-emphasis small">
+                                {{ week.assignment }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% block extra_css %}
+<style>
+/* Sidebar and Timeline Specific Styling adjustments */
+.roadmap-timeline {
+    position: relative;
+    padding-left: 50px;
+    border-left: 3px solid #dee2e6;
+    margin-left: 20px;
+}
+
+.timeline-item {
+    position: relative;
+}
+
+.timeline-badge {
+    position: absolute;
+    left: -71px;
+    top: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    border: 4px solid var(--bg-body, #ffffff);
+    z-index: 2;
+}
+
+.border-end-md {
+    border-right: 1px solid #dee2e6;
+}
+
+@media (max-width: 768px) {
+    .border-end-md {
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+}
+</style>
+{% endblock %}
+{% endblock %}

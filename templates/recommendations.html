@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid px-0">
+    <!-- Header -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Study Recommendations</h2>
+            <p class="text-muted small mb-0">Targeted preparation material and projects for a <strong>{{ job_role }}</strong> career</p>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="{{ url_for('main.result', analysis_id=analysis_id) }}" class="btn btn-outline-secondary rounded-pill px-3">
+                <i class="fa-solid fa-arrow-left me-1"></i> Back to Report
+            </a>
+            <a href="{{ url_for('main.roadmap', analysis_id=analysis_id) }}" class="btn btn-primary rounded-pill px-3 fw-bold">
+                <i class="fa-solid fa-route me-1"></i> View Learning Roadmap
+            </a>
+        </div>
+    </div>
+    
+    <!-- Tabbed Content Section -->
+    <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+        <ul class="nav nav-tabs nav-fill mb-4 border-bottom pb-2" id="resource-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active fw-bold py-2.5" id="cert-tab" data-bs-toggle="tab" data-bs-target="#cert-panel" type="button" role="tab">
+                    <i class="fa-solid fa-certificate text-danger me-2"></i> Certifications
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold py-2.5" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses-panel" type="button" role="tab">
+                    <i class="fa-solid fa-graduation-cap text-primary me-2"></i> Online Courses
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold py-2.5" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projects-panel" type="button" role="tab">
+                    <i class="fa-solid fa-diagram-project text-success me-2"></i> Up-Skilling Projects
+                </button>
+            </li>
+        </ul>
+        
+        <div class="tab-content" id="resource-tabs-content">
+            <!-- Panel 1: Certifications -->
+            <div class="tab-pane fade show active" id="cert-panel" role="tabpanel">
+                <div class="row g-4">
+                    {% if recs and recs.certifications %}
+                        {% for cert in recs.certifications %}
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded-3 h-100 hover-lift bg-light-subtle">
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="badge bg-danger me-2"><i class="fa-solid fa-award"></i></span>
+                                    <h6 class="fw-bold mb-0 text-dark">{{ cert.name }}</h6>
+                                </div>
+                                <div class="text-muted small mb-1">Issuer: <strong>{{ cert.issuer }}</strong></div>
+                                <p class="text-secondary small mb-0">{{ cert.description }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-12 text-center py-5">
+                            <p class="text-muted small">No specific certifications found.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Panel 2: Courses -->
+            <div class="tab-pane fade" id="courses-panel" role="tabpanel">
+                <div class="row g-4">
+                    {% if recs and recs.courses %}
+                        {% for course in recs.courses %}
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded-3 h-100 hover-lift d-flex justify-content-between align-items-start gap-2 bg-light-subtle">
+                                <div>
+                                    <h6 class="fw-bold mb-1 text-dark">{{ course.title }}</h6>
+                                    <div class="text-muted small mb-1">Provider: <strong>{{ course.provider }}</strong></div>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle fs-8">{{ course.level }}</span>
+                                </div>
+                                <a href="{{ course.url }}" target="_blank" class="btn btn-outline-primary btn-sm px-3 rounded-pill text-nowrap" rel="noopener noreferrer">
+                                    Join Course <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-12 text-center py-5">
+                            <p class="text-muted small">No courses found.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Panel 3: Projects -->
+            <div class="tab-pane fade" id="projects-panel" role="tabpanel">
+                <div class="row g-4">
+                    {% if recs and recs.projects %}
+                        {% for proj in recs.projects %}
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded-3 h-100 hover-lift bg-light-subtle d-flex flex-column justify-content-between">
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h6 class="fw-bold mb-0 text-dark">{{ proj.title }}</h6>
+                                        <span class="badge {% if proj.difficulty == 'Beginner' %}bg-success-subtle text-success{% elif proj.difficulty == 'Intermediate' %}bg-warning-subtle text-warning{% else %}bg-danger-subtle text-danger{% endif %} border rounded-pill px-2.5 py-1 fs-8">{{ proj.difficulty }}</span>
+                                    </div>
+                                    <p class="text-secondary small mb-2">{{ proj.description }}</p>
+                                </div>
+                                <div class="pt-2 border-top">
+                                    <span class="small text-muted me-1">Tech Stack:</span>
+                                    <strong class="small text-primary">{{ proj.tech_stack }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-12 text-center py-5">
+                            <p class="text-muted small">No projects found.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Interview Prep Tips Panel -->
+    <div class="card border-0 shadow-sm rounded-4 p-4 bg-light">
+        <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-comments-question text-warning me-2"></i>Interview Preparation Tips</h5>
+        <ul class="list-unstyled mb-0">
+            {% if recs and recs.interview_prep_tips %}
+                {% for tip in recs.interview_prep_tips %}
+                <li class="d-flex align-items-start mb-2.5 last-mb-0">
+                    <span class="badge bg-warning p-1 me-2.5 mt-0.5"><i class="fa-solid fa-circle-question text-white fs-8"></i></span>
+                    <span class="text-secondary small">{{ tip }}</span>
+                </li>
+                {% endfor %}
+            {% else %}
+                <li class="text-muted small">Be prepared to explain technical solutions and demonstrate your credentials and projects portfolio.</li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

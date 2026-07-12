@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Gap Analysis Agent - AI Career Advisor</title>
+    
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Style sheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        {% if current_user.is_authenticated %}
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-graduation-cap text-primary me-2"></i>
+                <span>SkillGap<strong>Agent</strong></span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('main.dashboard') }}" class="nav-item {% if request.endpoint == 'main.dashboard' %}active{% endif %}">
+                    <i class="fa-solid fa-chart-pie"></i><span>Dashboard</span>
+                </a>
+                <a href="{{ url_for('main.upload') }}" class="nav-item {% if request.endpoint == 'main.upload' %}active{% endif %}">
+                    <i class="fa-solid fa-cloud-arrow-up"></i><span>Upload Resume</span>
+                </a>
+                <a href="{{ url_for('main.analysis') }}" class="nav-item {% if request.endpoint == 'main.analysis' or request.endpoint == 'main.result' %}active{% endif %}">
+                    <i class="fa-solid fa-laptop-code"></i><span>Skill Analysis</span>
+                </a>
+                <a href="{{ url_for('main.profile') }}" class="nav-item {% if request.endpoint == 'main.profile' %}active{% endif %}">
+                    <i class="fa-solid fa-user-gear"></i><span>Profile Settings</span>
+                </a>
+                <a href="{{ url_for('main.about') }}" class="nav-item {% if request.endpoint == 'main.about' %}active{% endif %}">
+                    <i class="fa-solid fa-circle-info"></i><span>About System</span>
+                </a>
+                <a href="{{ url_for('main.contact') }}" class="nav-item {% if request.endpoint == 'main.contact' %}active{% endif %}">
+                    <i class="fa-solid fa-envelope"></i><span>Contact Us</span>
+                </a>
+                <hr class="sidebar-divider">
+                <a href="{{ url_for('main.logout') }}" class="nav-item text-danger">
+                    <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
+                </a>
+            </nav>
+        </aside>
+        {% endif %}
+        
+        <!-- Main Layout Area -->
+        <div class="main-wrapper">
+            <!-- Header Bar -->
+            <header class="top-header">
+                <div class="header-left">
+                    {% if current_user.is_authenticated %}
+                    <span class="welcome-text">Welcome back, <strong>{{ current_user.username }}</strong>!</span>
+                    {% else %}
+                    <a href="{{ url_for('main.index') }}" class="header-brand">
+                        <i class="fa-solid fa-graduation-cap text-primary me-2"></i>
+                        <span>SkillGap<strong>Agent</strong></span>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="header-right">
+                    <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Light/Dark Mode">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                    
+                    {% if current_user.is_authenticated %}
+                    <!-- Notifications Dropdown -->
+                    <div class="dropdown me-3">
+                        <button class="header-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="notif-btn">
+                            <i class="fa-solid fa-bell"></i>
+                            <span class="badge-dot bg-danger"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end p-3 notif-dropdown" aria-labelledby="notif-btn">
+                            <li class="dropdown-header border-bottom pb-2 mb-2">Notifications</li>
+                            <li>
+                                <a class="dropdown-item notif-item rounded mb-1 p-2" href="{{ url_for('main.upload') }}">
+                                    <div class="fw-bold text-dark text-truncate">Complete your resume upload</div>
+                                    <div class="text-muted small">Upload your resume to start parsing skills.</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item notif-item rounded p-2" href="{{ url_for('main.analysis') }}">
+                                    <div class="fw-bold text-dark text-truncate">Target roles ready</div>
+                                    <div class="text-muted small">Select your role and generate roadmaps!</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dropdown">
+                        <button class="header-profile-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="profile-avatar">{{ current_user.username[:2].upper() }}</div>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                            <li><a class="dropdown-item" href="{{ url_for('main.profile') }}"><i class="fa-solid fa-user-circle me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('main.dashboard') }}"><i class="fa-solid fa-table-columns me-2"></i>Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="{{ url_for('main.logout') }}"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                    {% else %}
+                    <a href="{{ url_for('main.login') }}" class="btn btn-outline-primary btn-sm px-3 me-2">Login</a>
+                    <a href="{{ url_for('main.register') }}" class="btn btn-primary btn-sm px-3">Register</a>
+                    {% endif %}
+                </div>
+            </header>
+            
+            <!-- Main Content Grid -->
+            <main class="content-body">
+                <!-- Flash Alerts System -->
+                <div class="container-fluid px-0">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm rounded-3 border-0 mb-4" role="alert">
+                                    <i class="fa-solid {% if category == 'success' %}fa-circle-check{% elif category == 'danger' %}fa-circle-exclamation{% else %}fa-circle-info{% endif %} me-2"></i>
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                
+                <!-- Page Layout Body -->
+                {% block content %}{% endblock %}
+            </main>
+            
+            <!-- Footer -->
+            <footer class="main-footer">
+                <div class="container-fluid text-center text-muted">
+                    <p class="mb-0">&copy; 2026 Skill Gap Analysis Agent. All Rights Reserved. Prepared for Senior Year Capstone Engineering Project.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+    {% if current_user.is_authenticated %}
+    <!-- Floating AI Career Buddy Chat Assistant Drawer -->
+    <div class="chat-drawer shadow-lg" id="chat-drawer">
+        <div class="chat-drawer-header">
+            <div class="d-flex align-items-center">
+                <div class="chat-avatar me-2"><i class="fa-solid fa-robot"></i></div>
+                <div>
+                    <h6 class="mb-0 text-white fw-bold">Career Buddy</h6>
+                    <span class="chat-status text-white-50">Online Advisor</span>
+                </div>
+            </div>
+            <button class="chat-close-btn" id="chat-close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="chat-drawer-body" id="chat-messages">
+            <div class="chat-message bot-msg">
+                Hello! I am <strong>Career Buddy</strong>, your AI career advisor. Ask me anything about building projects, learning resources, interview preparations, or certifications!
+            </div>
+        </div>
+        <div class="chat-drawer-footer">
+            <form id="chat-form" class="d-flex w-100">
+                <input type="text" id="chat-input" class="form-control me-2" placeholder="Ask Career Buddy..." required autocomplete="off">
+                <button type="submit" class="btn btn-primary btn-icon"><i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Floating Toggle Button -->
+    <button class="chat-toggle-btn shadow-lg" id="chat-toggle" title="Chat with AI Career Buddy">
+        <i class="fa-solid fa-comments"></i>
+    </button>
+    {% endif %}
+
+    <!-- Bootstrap 5 Bundle with Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Global Actions Javascript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

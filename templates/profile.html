@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid px-0">
+    <div class="mb-4">
+        <h2 class="fw-bold mb-1">Profile Settings</h2>
+        <p class="text-muted small">Update your email, password, and view database account details</p>
+    </div>
+    
+    <div class="row g-4">
+        <!-- Settings Form Card -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 p-4">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-user-gear text-primary me-2"></i>Update Account Credentials</h5>
+                
+                <form action="{{ url_for('main.profile') }}" method="POST">
+                    <!-- Read-only Username -->
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted mb-1">Username (Immutable)</label>
+                        <input type="text" class="form-control p-3 bg-light rounded-3 text-muted" value="{{ current_user.username }}" readonly>
+                    </div>
+                    
+                    <!-- Email Input -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label small fw-bold text-dark mb-1">Email Address</label>
+                        <input type="email" class="form-control p-3 rounded-3" id="email" name="email" value="{{ user.email }}" required>
+                    </div>
+                    
+                    <!-- New Password Input -->
+                    <div class="mb-4">
+                        <label for="password" class="form-label small fw-bold text-dark mb-1">New Password (Leave blank to keep current)</label>
+                        <input type="password" class="form-control p-3 rounded-3" id="password" name="password" placeholder="Enter new password (min. 6 characters)" minlength="6">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-sm">
+                        Save Configuration Changes <i class="fa-solid fa-circle-check ms-1"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Account Info panel -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-circle-info text-primary me-2"></i>Account Diagnostics</h5>
+                <ul class="list-group list-group-flush text-secondary mb-0">
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
+                        <div>
+                            <div class="fw-bold text-dark">Account Registration Date</div>
+                            <div class="text-muted small">Date when you joined the platform</div>
+                        </div>
+                        <span class="badge bg-light text-dark border p-2">{{ user.created_at[:10] }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
+                        <div>
+                            <div class="fw-bold text-dark">Database User ID</div>
+                            <div class="text-muted small">Unique SQLite identifying key</div>
+                        </div>
+                        <span class="badge bg-light text-dark border p-2">UID-{{ user.id }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid px-0">
+    <div class="mb-4">
+        <h2 class="fw-bold mb-1">Skill Gap Analysis</h2>
+        <p class="text-muted small">Select your target career path to analyze your current skill compatibility score</p>
+    </div>
+    
+    <div class="row g-4">
+        <!-- Selection Panel -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 p-4">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-crosshairs text-primary me-2"></i>Select Target Role</h5>
+                
+                <form action="{{ url_for('main.analysis') }}" method="POST" id="analysis-form">
+                    <!-- Search Input for Roles -->
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted mb-1">Search & Filter Roles</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                            <input type="text" id="role-search" class="form-control bg-light border-start-0" placeholder="Type to filter roles...">
+                        </div>
+                    </div>
+                    
+                    <!-- Roles Dropdown Select -->
+                    <div class="mb-4">
+                        <label for="target_role" class="form-label fw-bold text-dark mb-1">Target Professional Role</label>
+                        <select class="form-select p-3 rounded-3" id="target_role" name="target_role" size="8" required>
+                            {% for role in roles %}
+                            <option value="{{ role }}">{{ role }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    {% if user_skills %}
+                    <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-sm" id="run-btn">
+                        Run AI Analysis <i class="fa-solid fa-bolt ms-1"></i>
+                    </button>
+                    {% else %}
+                    <div class="alert alert-warning border-0 rounded-3 small mb-0">
+                        <i class="fa-solid fa-circle-exclamation me-2"></i>You must load skills into your profile before running analysis.
+                        <a href="{{ url_for('main.upload') }}" class="alert-link fw-bold">Upload Resume now.</a>
+                    </div>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+        
+        <!-- Skills Preview Panel -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-tags text-primary me-2"></i>Your Analytical Skillset</h5>
+                
+                {% if user_skills %}
+                <p class="text-muted small mb-3">These are the parsed skills that will be compared against the target job role's requirements:</p>
+                <div class="d-flex flex-wrap gap-2 overflow-auto" style="max-height: 350px;">
+                    {% for skill in user_skills %}
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 fs-7">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+                <div class="mt-4 pt-3 border-top">
+                    <span class="text-muted small">Noticed missing skills?</span>
+                    <a href="{{ url_for('main.upload') }}" class="small fw-bold text-decoration-none ms-1">Update your skills profile</a>
+                </div>
+                {% else %}
+                <div class="text-center py-5">
+                    <i class="fa-solid fa-laptop-code text-muted fa-2x mb-2"></i>
+                    <p class="text-muted small mb-0">Your profile doesn't have any skills configured.</p>
+                    <a href="{{ url_for('main.upload') }}" class="btn btn-outline-primary btn-sm mt-3 px-3 rounded-pill">Upload Resume / Add Skills</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Filter Job Roles option lists dynamically based on search string
+const searchInput = document.getElementById('role-search');
+const select = document.getElementById('target_role');
+const originalOptions = Array.from(select.options);
+
+searchInput.addEventListener('input', function() {
+    const filter = searchInput.value.toLowerCase().trim();
+    
+    // Clear dropdown
+    select.innerHTML = '';
+    
+    // Filter and append
+    originalOptions.forEach(option => {
+        if (option.text.toLowerCase().includes(filter)) {
+            select.appendChild(option.cloneNode(true));
+        }
+    });
+});
+
+// Loading state on submit
+const form = document.getElementById('analysis-form');
+const runBtn = document.getElementById('run-btn');
+
+if (form && runBtn) {
+    form.addEventListener('submit', function() {
+        runBtn.disabled = true;
+        runBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Running AI Matcher...';
+    });
+}
+</script>
+{% block extra_css %}
+<style>
+/* Adjust multi-line select behavior */
+#target_role {
+    max-height: 250px;
+}
+#target_role option {
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+#target_role option:checked {
+    background-color: #0d6efd !important;
+    color: white !important;
+}
+</style>
+{% endblock %}
+{% endblock %}

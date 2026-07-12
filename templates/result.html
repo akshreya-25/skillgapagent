@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid px-0">
+    <!-- Results Header -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Skill Gap Analysis Report</h2>
+            <p class="text-muted small mb-0">Review your compatibility for the role of <strong>{{ analysis.job_role }}</strong></p>
+        </div>
+        <div class="d-flex flex-wrap gap-2">
+            <a href="{{ url_for('main.export_pdf', analysis_id=analysis.id) }}" class="btn btn-outline-danger rounded-pill px-3 fw-bold">
+                <i class="fa-solid fa-file-pdf me-1"></i> Export PDF Report
+            </a>
+            <a href="{{ url_for('main.roadmap', analysis_id=analysis.id) }}" class="btn btn-primary rounded-pill px-3 fw-bold">
+                <i class="fa-solid fa-route me-1"></i> View Learning Roadmap
+            </a>
+            <a href="{{ url_for('main.recommendations', analysis_id=analysis.id) }}" class="btn btn-success rounded-pill px-3 fw-bold">
+                <i class="fa-solid fa-graduation-cap me-1"></i> Study Resources
+            </a>
+        </div>
+    </div>
+    
+    <!-- Score Summary & Key Info Card -->
+    <div class="row g-4 mb-4">
+        <!-- Readiness Gauge Card -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 text-center h-100 d-flex flex-column justify-content-center">
+                <h6 class="fw-bold text-muted text-uppercase mb-3">Job Readiness Score</h6>
+                
+                <!-- Circular Progress SVG -->
+                <div class="progress-circle-container mx-auto mb-3">
+                    <svg class="progress-circle" viewBox="0 0 100 100">
+                        <circle class="progress-circle-bg" cx="50" cy="50" r="45"></circle>
+                        <circle class="progress-circle-bar" cx="50" cy="50" r="45" style="stroke-dashoffset: calc(283 - (283 * {{ analysis.match_percentage }}) / 100); stroke: {% if analysis.match_percentage >= 75 %}#198754{% elif analysis.match_percentage >= 50 %}#ffc107{% else %}#dc3545{% endif %};"></circle>
+                    </svg>
+                    <div class="progress-circle-value fw-extrabold text-dark">{{ analysis.match_percentage }}%</div>
+                </div>
+                
+                <h5 class="fw-bold mb-1">
+                    {% if analysis.match_percentage >= 75 %}
+                        <span class="text-success">Highly Match!</span>
+                    {% elif analysis.match_percentage >= 50 %}
+                        <span class="text-warning">Moderate Match</span>
+                    {% else %}
+                        <span class="text-danger">Significant Gap</span>
+                    {% endif %}
+                </h5>
+                <p class="text-muted small mb-0">Matched <strong>{{ matched_skills|length }}</strong> out of <strong>{{ (matched_skills|length + missing_skills|length) }}</strong> required role skills.</p>
+            </div>
+        </div>
+        
+        <!-- Advisor Context summary -->
+        <div class="col-md-8">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-lightbulb text-warning me-2"></i>Career Advisor Insights</h5>
+                
+                {% if recs and recs.missing_skills_explanation %}
+                <p class="text-muted small">Here is why missing skills are critical for a <strong>{{ analysis.job_role }}</strong> role:</p>
+                <div class="overflow-auto pe-1" style="max-height: 180px;">
+                    <ul class="list-unstyled mb-0">
+                        {% for skill, explanation in recs.missing_skills_explanation.items() %}
+                        <li class="mb-3 border-bottom pb-2 last-border-0">
+                            <span class="badge bg-danger-subtle text-danger mb-1">{{ skill }}</span>
+                            <p class="text-secondary small mb-0">{{ explanation }}</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% else %}
+                <div class="py-4 text-center">
+                    <i class="fa-solid fa-square-check text-success fa-3x mb-2"></i>
+                    <h6 class="fw-bold text-success mb-1">All Core Skills Present!</h6>
+                    <p class="text-muted small mb-0">You match 100% of the core competencies for this role. Use your customized roadmap to target advanced up-skilling!</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- Skills Matrix Grid Columns -->
+    <div class="row g-4 mb-4">
+        <!-- Column 1: Matched Skills -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="badge-icon bg-success-subtle text-success me-2"><i class="fa-solid fa-circle-check"></i></div>
+                    <h5 class="fw-bold text-dark mb-0">Matched Skills ({{ matched_skills|length }})</h5>
+                </div>
+                {% if matched_skills %}
+                <div class="d-flex flex-wrap gap-2">
+                    {% for skill in matched_skills %}
+                    <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1.5 fs-7">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-muted small">No matched skills. Check your uploads.</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Column 2: Missing Skills -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="badge-icon bg-danger-subtle text-danger me-2"><i class="fa-solid fa-circle-xmark"></i></div>
+                    <h5 class="fw-bold text-dark mb-0">Missing Skills ({{ missing_skills|length }})</h5>
+                </div>
+                {% if missing_skills %}
+                <div class="d-flex flex-wrap gap-2">
+                    {% for skill in missing_skills %}
+                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1.5 fs-7">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-muted small text-success fw-bold"><i class="fa-solid fa-face-smile me-1"></i>You meet all requirements!</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Column 3: Extra Skills -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="badge-icon bg-info-subtle text-info me-2"><i class="fa-solid fa-circle-plus"></i></div>
+                    <h5 class="fw-bold text-dark mb-0">Extra Skills ({{ extra_skills|length }})</h5>
+                </div>
+                {% if extra_skills %}
+                <div class="d-flex flex-wrap gap-2">
+                    {% for skill in extra_skills %}
+                    <span class="badge bg-info-subtle text-info border border-info-subtle px-2 py-1.5 fs-7">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-muted small">No additional skills found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- Charts Section -->
+    <div class="row g-4">
+        <!-- Pie Chart -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 p-4">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-chart-pie text-primary me-2"></i>Match vs Missing Ratio</h5>
+                <div style="height: 300px; position: relative;">
+                    <canvas id="ratioPieChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bar Graph -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 p-4">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-chart-bar text-primary me-2"></i>Required Skills Comparison</h5>
+                <div style="height: 300px; position: relative;">
+                    <canvas id="comparisonBarChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart Setup Scripts -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const matchedCount = {{ matched_skills|length }};
+    const missingCount = {{ missing_skills|length }};
+    
+    // --- 1. PIE CHART ---
+    const ctxPie = document.getElementById('ratioPieChart').getContext('2d');
+    new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: ['Matched Skills', 'Missing Skills'],
+            datasets: [{
+                data: [matchedCount, missingCount],
+                backgroundColor: ['#198754', '#dc3545'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: { family: 'Outfit', size: 12 },
+                        padding: 20
+                    }
+                }
+            }
+        }
+    });
+    
+    // --- 2. BAR CHART ---
+    const ctxBar = document.getElementById('comparisonBarChart').getContext('2d');
+    
+    // Mix matched list and missing list to display required role skills status
+    const matchedList = {{ matched_skills|tojson }};
+    const missingList = {{ missing_skills|tojson }};
+    
+    const labels = [...matchedList, ...missingList];
+    const dataValues = [
+        ...matchedList.map(() => 1),  // 1 represents Present
+        ...missingList.map(() => 0)   // 0 represents Missing
+    ];
+    const colors = [
+        ...matchedList.map(() => '#198754'),
+        ...missingList.map(() => '#dc3545')
+    ];
+    
+    new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Status (Acquired = 1, Missing = 0)',
+                data: dataValues,
+                backgroundColor: colors,
+                borderWidth: 0,
+                borderRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 1,
+                    ticks: {
+                        stepSize: 1,
+                        callback: function(value) {
+                            if (value === 1) return 'Acquired';
+                            if (value === 0) return 'Missing';
+                            return '';
+                        }
+                    }
+                },
+                x: {
+                    ticks: {
+                        autoSkip: false,
+                        maxRotation: 45,
+                        minRotation: 45
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}
